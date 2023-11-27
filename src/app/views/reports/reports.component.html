@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">Report generator</div>
+    <div class="card-body">
+      <div class="row" *ngIf="isAdmin">
+        <mat-form-field class="col-12 col-md-4">
+          <mat-label>Select user(s)</mat-label>
+          <mat-select [(value)]="assignedSelect1" multiple required>
+            <mat-option *ngFor="let user of Users$" [value]="user._id">
+              {{ user.username }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button (click)="assignAll()" class="selectall">
+          Select All
+        </button>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <label for="start_date"><span>Start date</span></label>
+          <input
+            type="date"
+            [value]="start_date"
+            name="start_date"
+            placeholder="..-..-...."
+            class="form-control input-lg"
+            (input)="start_date = $event.target.value"
+          />
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-3">
+          <label for="stop_date"><span>Stop date</span></label>
+          <input
+            type="date"
+            [value]="stop_date"
+            name="stop_date"
+            placeholder="..-..-...."
+            class="form-control input-lg"
+            (input)="stop_date = $event.target.value"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <input
+            type="button"
+            class="btn btn-outline-dark mt-2"
+            value="Get report"
+            (click)="download_report()"
+            [disabled]="loading"
+          />
+          <img
+            *ngIf="loading"
+            style="width: 16px; height: 16px"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

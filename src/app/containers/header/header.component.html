@@ -1,0 +1,52 @@
+<header class="app-header navbar">
+  <ng-template [ngIf]="mobileSidebarToggler != false">
+    <button class="navbar-toggler d-lg-none" type="button" (click)="toggleSidebar()" appsidebartoggler>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </ng-template>
+  <ng-template [ngIf]="navbarBrand">
+    <a class="navbar-brand" href="#" style="width:fit-content; padding-left: 10px;">
+      <img *ngIf="navbarBrand" [src]="imgSrc(navbarBrand)" style="height: 35px; width: 200px;">
+    </a>
+  </ng-template>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="onclick()">
+        <img src="{{image_foto}}" class="img-avatar" height="20px" width="30px" style="cursor: pointer;"/>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>Account</strong>
+          <span class="badge badge-info" *ngIf="user.isAdmin">Admin</span>
+        </div>
+        <a class="dropdown-item" routerLink="/warning" routerLinkActive="active" *ngIf="user.isAdmin">
+          <i class="fa fa-bell-o"> </i> Warning
+          <!-- <span class="badge badge-info">0</span> -->
+        </a>
+        <!-- <a class="dropdown-item" routerLink="/messages" routerLinkActive="active">
+          <i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">0</span>
+        </a> -->
+        <a class="dropdown-item" routerLink="/users" routerLinkActive="active" *ngIf="user.isAdmin">
+          <i class="fa fa-envelope-o"></i>Users 
+          <!-- <span class="badge badge-success">{{users_total}}</span> -->
+        </a>
+        <!-- <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
+        <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">
+          <i class="fa fa-user"></i> Profile
+        </a>
+        <!-- <a class="dropdown-item" routerLink="/settings" routerLinkActive="active">
+          <i class="fa fa-wrench"></i> Setting
+        </a> -->
+        <!-- <a class="dropdown-item" routerLink="/payments" routerLinkActive="active">
+          <i class="fa fa-eur"></i> Payments<span class="badge badge-dark">0</span>
+        </a> -->
+        <a class="dropdown-item" routerLink="/prikklok" routerLinkActive="active">
+          <i class="fa fa-eur"></i> Time accounting
+        </a>
+        <a class="dropdown-item" (click)="logout()">
+          <i class="fa fa-lock"></i> Logout @{{user.username}}
+        </a>
+      </div>
+    </li>
+  </ul>
+</header>

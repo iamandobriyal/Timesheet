@@ -1,0 +1,23 @@
+<div class="col-12-md col-7-lg">
+  <div class="card d-inline-block">
+    <div class="card-header">Add Project</div>
+    <div class="card-body">
+      <mat-form-field>
+        <mat-label>Pick Project</mat-label>
+        <mat-select [(ngModel)]="selectedproject">
+          <mat-option *ngFor="let project of projects" [value]="project._id">
+            {{ project.project_name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="d-flex">
+        <button class="btn btn-outline-success mr-2" (click)="add_project()">Add project</button>
+        <input type="button" routerLink="/projects" routerLinkActive="active" class="btn btn-outline-dark mx-2" value="Cancel" />
+      </div>
+      <div class="col  mt-2 p-0">
+        <p>Cannot find your project in the list?</p>
+        <input type="button" routerLink="/projects/new" routerLinkActive="active" class="btn btn-outline-success" value="Create Project" />
+      </div>
+    </div>
+  </div>
+</div>

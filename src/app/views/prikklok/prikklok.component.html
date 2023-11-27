@@ -1,0 +1,126 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">Time accounting</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <button class="btn  btn-outline-secondary width-pre" (click)="decreaseDate()"> < </button>
+          <mat-form-field>
+            <input
+              matInput
+              type="date"
+              [(ngModel)]="currentDate"
+              (change)="onDateChange()"
+            />
+          <div *ngIf="currentDay" class="currentday">{{ currentDay }}</div>
+          </mat-form-field>
+          <button class="btn btn-outline-secondary width-next" (click)="increaseDate()"> > </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table
+            class="table table-responsive table-striped table-hover table-sm"
+          >
+            <thead>
+              <tr>
+                <th>
+                  <p class="width=100px;">PROJECT</p>
+                </th>
+                <th>
+                  <p class="width=100px;">TASK</p>
+                </th>
+                <th>
+                  <p class="width=100px;">HOURS</p>
+                </th>
+                <th>
+                  <p class="width=100px;">COMMENT</p>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <ng-container *ngIf="events?.length > 0; else noEvents">
+                <tr *ngFor="let event of events">
+                  <td>
+                    <mat-form-field>
+                      <mat-label>Pick Project</mat-label>
+                      <mat-select [(value)]="event.projectId">
+                        <mat-option
+                          *ngFor="let project of projects"
+                          [value]="project.projectId"
+                        >
+                          {{ project.projectName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <mat-label>Pick Task</mat-label>
+                      <mat-select [(value)]="event.task">
+                        <ng-container
+                          *ngFor="let project of projects"
+                          
+                        >
+                        <ng-container *ngIf="project.projectId === event.projectId">
+                          <mat-option
+                            *ngFor="let task of project.tasks"
+                            [value]="task"
+                          >
+                            {{ task }}
+                          </mat-option>
+                        </ng-container>
+                        </ng-container>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="number" [(ngModel)]="event.hours" (ngModelChange)="calculateTotalHours()"/>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="text" [(ngModel)]="event.comment" />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </ng-container>
+              <tr>
+                <td></td>
+                <th>Total Hours</th>
+                <td>{{ totalHours }}</td>
+                <td></td>
+              </tr>
+              <ng-template #noEvents>
+                <tr>
+                  <td colspan="2">No events found.</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-info button-margin" style="color: white;" (click)="add_row()">
+          Add project
+        </button>
+        <button
+          class="btn btn-success button-margin"
+          [disabled]="loading"
+          (click)="save_data()"
+        >
+          Save
+        </button>
+        <img
+          *ngIf="loading"
+          style="width: 16px; height: 16px"
+          src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
+    </div>
+  </div>
+</div>

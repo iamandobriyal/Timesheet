@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">Analytics</div>
+  <div class="card-body">
+    <div>
+      <div class="row">
+        <mat-form-field class="col-12 col-md-4">
+          <mat-label>Select user(s)</mat-label>
+          <mat-select [(value)]="selectedUser" (selectionChange)="onUserSelect()" required>
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div style="display: block">
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [chartType]="barChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

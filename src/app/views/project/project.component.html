@@ -1,0 +1,94 @@
+<div class="animated fadeIn">
+  <div class="col-8-md col-7-lg">
+    <div class="card width-card">
+      <div class="card-header">
+        Projects
+        <div class="small text-muted">
+          Only active projects of an user are visable in Prikklok.
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 d-flex">
+            <p *ngIf="!this.isAdmin">If you want to add or create project please contact admin.</p>
+            <input
+              style="float: left"
+              type="button"
+              routerLink="/projects/add"
+              routerLinkActive="active"
+              class="btn btn-outline-dark"
+              value="Add project"
+              style="margin-bottom: 10px"
+              *ngIf="this.isAdmin"
+            />
+            <input
+              type="button"
+              routerLink="/projects/new"
+              routerLinkActive="active"
+              class="btn btn-outline-dark ml-2"
+              value="Create Project"
+              style="margin-bottom: 10px"
+              *ngIf="this.isAdmin"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <hr />
+
+          <table class="table" *ngIf="projects$">
+            <thead>
+              <tr>
+                <th><a>Project name</a></th>
+                <th><a>Status</a></th>
+                <th><a>Project customer</a></th>
+                <th><a>Description</a></th>
+                <th><a>Time start </a></th>
+                <th><a>Time due </a></th>
+                <th><a>Edit Project</a></th>
+                <th><a *ngIf="this.isAdmin">Remove project</a></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="projects$?.length != 0">
+              <tr class="" *ngFor="let project of projects$">
+                <td>{{ project.project_name }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.project_customer }}</td>
+                <td>{{ project.description }}</td>
+                <td>
+                  <a> {{ convertDate(project.time_start) }} </a>
+                </td>
+                <td>
+                  <a> {{ convertDate(project.time_due) }} </a>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-outline-dark"
+                    routerLink="/projects/{{ project._id }}/edit"
+                    routerLinkActive="active"
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="deletebtn"
+                    *ngIf="this.isAdmin"
+                    (click)="remove_project(project._id, project.project_name)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="projects$?.length == 0">
+              <tr>
+                <td colspan="11" class="no-data-available">No data!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

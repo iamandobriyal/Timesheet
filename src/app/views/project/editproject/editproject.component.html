@@ -1,0 +1,122 @@
+<div class="col-12-md col-7-lg">
+  <div class="card">
+    <div class="card-header">Edit Project</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <label for="project_name"><span>Project name</span></label>
+          <input
+            type="text"
+            [(ngModel)]="projectName"
+            placeholder="My awesome project"
+            class="form-control input-lg"
+          />
+        </div>
+
+        <div class="col-3">
+          <label for="start_date"><span>Start date</span></label>
+          <input
+            type="date"
+            [(ngModel)]="startDate"
+            name="start_date"
+            placeholder="..-..-...."
+            class="form-control input-lg"
+          />
+        </div>
+
+        <div class="col-3">
+          <label for="due_date"><span>Due date</span></label>
+          <input
+            type="date"
+            [(ngModel)]="dueDate"
+            name="due_date"
+            placeholder="..-..-...."
+            class="form-control input-lg"
+          />
+        </div>
+      </div>
+
+      <br />
+
+      <label for="project_customer"><span>Project Client</span></label>
+      <input
+        type="text"
+        [(ngModel)]="projectClient"
+        placeholder="Project Client"
+        class="form-control input-lg"
+      />
+
+      <br />
+
+      <label for="description"><span>Project description</span></label>
+      <textarea
+        [(ngModel)]="description"
+        name="description"
+        placeholder="Max length 250..."
+        class="form-control"
+        rows="3"
+        maxlength="250"
+      ></textarea>
+
+      <br />
+        <div class="d-flex align-items-start flex-column">
+          <div class="col-6 p-0">
+            <label class="mr-3"><span>Add task</span></label>
+            <input
+              type="text"
+              [(ngModel)]="newTask"
+              name="add_task"
+              placeholder="Add a new task"
+              class="form-control input-lg"
+              (keyup.enter)="addTask()"
+            />
+            <button type="button" class="btn btn-outline-primary mt-2" (click)="addTask()">Add</button>
+          </div>
+          <div class="col-3 p-0 mt-2">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of tasks; let i = index">
+                  <td>{{ task }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger btn-sm"
+                      (click)="removeTask(i)"
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-0">
+            <mat-form-field class="col-6 col-md-6 p-0 m-0">
+              <mat-label>Assign Users</mat-label>
+              <mat-select [(value)]="assignedSelect1" multiple required>
+                <mat-option
+                  *ngFor="let assigned of assigned$"
+                  [value]="assigned._id"
+                >
+                  {{ assigned.username }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      
+      <br />
+      <div class="col-6 p-0">
+        <button type="button" class="btn btn-outline-success" (click)="update_project()">Save</button>
+        <input type="button" class="btn btn-link" routerLink="/projects" routerLinkActive="active" value="Cancel"/>
+      </div>
+      <p>{{error_string}}</p>
+    </div>
+  </div>
+</div>
