@@ -141,7 +141,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { AnalyticsComponent } from './views/analytics/analytics.component';
 
 
 
@@ -155,7 +154,6 @@ import { AnalyticsComponent } from './views/analytics/analytics.component';
     Error505Component,
     NoPremissionsComponent,
     LicenseComponent,
-    AnalyticsComponent
   ],
   imports: [
     AuthModule,

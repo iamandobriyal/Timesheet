@@ -10,9 +10,11 @@ import { Label } from "ng2-charts";
 })
 export class AnalyticsComponent implements OnInit {
   public analyticsData: any; // To store the raw analytics data
-  public users: string[]; // To store the user names for the dropdown
+  public users: any[]; // To store the user names for the dropdown
   public selectedUser: string; // To store the currently selected user
 
+
+  
   // Chart related properties
   public barChartOptions: ChartOptions = {
     responsive: true,

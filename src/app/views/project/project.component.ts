@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   public thisyear = String(new Date().getFullYear());
   public year_array: string[] = [this.thisyear];
 
-  
+  public projectStatus: string = "own";
 
 
 
@@ -91,5 +91,21 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
    }
 
+   onChangeProjectStatus()
+    {
+      if(this.projectStatus=="all")
+      {
+        this.data.getallprojects().subscribe(data => {
+          this.projects$ = data;
+        }
+        );
+      }
+      else
+      {
+        this.data.GetProjects().subscribe(data => {
+          this.projects$ = data;
+        });
+      }
+    }
   
 }

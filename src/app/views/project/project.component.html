@@ -10,7 +10,7 @@
 
       <div class="card-body">
         <div class="row">
-          <div class="col-12 d-flex">
+          <div class="col-12 d-flex justify-content-between">
             <p *ngIf="!this.isAdmin">If you want to add or create project please contact admin.</p>
             <input
               style="float: left"
@@ -20,17 +20,27 @@
               class="btn btn-outline-dark"
               value="Add project"
               style="margin-bottom: 10px"
-              *ngIf="this.isAdmin"
+              *ngIf="0"
             />
             <input
               type="button"
               routerLink="/projects/new"
               routerLinkActive="active"
-              class="btn btn-outline-dark ml-2"
+              class="btn btn-outline-dark ml-0"
               value="Create Project"
               style="margin-bottom: 10px"
               *ngIf="this.isAdmin"
             />
+            <select
+              class="form-control"
+              style="width: 200px; float: right"
+              [(ngModel)]="projectStatus"
+              (change)="onChangeProjectStatus()"
+              *ngIf="this.isAdmin"
+            >
+              <option value="own">My Projects</option>
+              <option value="all">All Projects</option>
+            </select>
           </div>
         </div>
         <div class="row">
